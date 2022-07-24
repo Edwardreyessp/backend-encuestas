@@ -8,7 +8,7 @@ app = Flask(__name__)
 from questions import questions
 
 # Config
-app.config["UPLOAD_FOLDER"] = "temp"
+app.config["UPLOAD_FOLDER"] = "/temp/"
 ALLOWED_EXTENSIONS = set(["docx", "csv", "xlsx"])
 
 def allowed_file(file):

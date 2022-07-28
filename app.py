@@ -8,8 +8,8 @@ app = Flask(__name__)
 from questions import questions
 
 # Config
-app.config["UPLOAD_FOLDER"] = "/temp/"
-ALLOWED_EXTENSIONS = set(["docx", "csv", "xlsx"])
+app.config["UPLOAD_FOLDER"] = "static/files"
+ALLOWED_EXTENSIONS = set(["jpg", "docx", "csv", "xlsx"])
 
 def allowed_file(file):
     file = file.split('.')
@@ -37,7 +37,16 @@ def updateQuestion(question_name):
     question_name = question_name.split('-')
     for clave in questions:
         if clave == question_name[0]:
-            questions[clave]['respuestas'][question_name[1]] = request.json['respuesta']
+            questions[clave]['respuestas'][question_name[1]]['respuesta'] = request.json['respuesta']
+            return jsonify(questions[clave])
+    return 'Question not found'
+
+@app.route("/colors/<string:question_name>", methods=['PUT'])
+def updateColor(question_name):
+    question_name = question_name.split('-')
+    for clave in questions:
+        if clave == question_name[0]:
+            questions[clave]['respuestas'][question_name[1]]['color'] = request.json['color']
             return jsonify(questions[clave])
     return 'Question not found'
 

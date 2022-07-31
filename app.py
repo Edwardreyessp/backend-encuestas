@@ -1,7 +1,4 @@
-from fileinput import filename
 from flask import Flask, jsonify, request
-from werkzeug.utils import secure_filename
-import os
 
 app = Flask(__name__)
 
@@ -23,14 +20,14 @@ def allowed_file(file):
 def getQuestion():
     return jsonify(questions)
 
+@app.route("/questions", methods=['POST'])
+def getURL():
+    return "https://firebasestorage.googleapis.com/v0/b/encuestas-d19ab.appspot.com/o/data_encuestas.csv?alt=media&token=0e0618a2-685b-4c3b-a882-0c3ace622a9c"
+
 @app.route("/files", methods=['POST'])
 def addFile():
-    file = request.files["uploadFile"]
-    filename = secure_filename(file.filename)
-    if file and allowed_file(filename):
-        file.save(os.path.join(app.config["UPLOAD_FOLDER"], filename))
-        return "File(s) were upload"
-    return "FIle not supporting"
+    fileNames = request.json
+    return fileNames
 
 @app.route("/questions/<string:question_name>", methods=['PUT'])
 def updateQuestion(question_name):

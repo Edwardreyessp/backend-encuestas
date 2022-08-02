@@ -35,6 +35,7 @@ def updateQuestion(question_name):
     for clave in questions:
         if clave == question_name[0]:
             questions[clave]['respuestas'][question_name[1]]['respuesta'] = request.json['respuesta']
+            questions[clave]['respuestas'][question_name[1]]['color'] = request.json['color']
             return jsonify(questions[clave])
     return 'Question not found'
 

@@ -36,7 +36,7 @@ def updateQuestion(question_name):
         if clave == question_name[0]:
             questions[clave]['respuestas'][question_name[1]]['respuesta'] = request.json['respuesta']
             questions[clave]['respuestas'][question_name[1]]['color'] = request.json['color']
-            return jsonify(questions[clave])
+            return jsonify(questions)
     return 'Question not found'
 
 @app.route("/colors/<string:question_name>", methods=['PUT'])

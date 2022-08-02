@@ -39,14 +39,5 @@ def updateQuestion(question_name):
             return jsonify(questions)
     return 'Question not found'
 
-@app.route("/colors/<string:question_name>", methods=['PUT'])
-def updateColor(question_name):
-    question_name = question_name.split('-')
-    for clave in questions:
-        if clave == question_name[0]:
-            questions[clave]['respuestas'][question_name[1]]['color'] = request.json['color']
-            return jsonify(questions[clave])
-    return 'Question not found'
-
 if __name__ == "__main__":
     app.run(debug = False, port=4000)

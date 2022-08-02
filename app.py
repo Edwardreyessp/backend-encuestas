@@ -48,4 +48,4 @@ def updateColor(question_name):
     return 'Question not found'
 
 if __name__ == "__main__":
-    app.run(debug = True, port=4000)
+    app.run(debug = False, port=4000)

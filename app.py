@@ -1,8 +1,8 @@
 from flask import Flask, jsonify, request
-from flask_cors import CORS
+from flask_cors import CORS, cross_origin
 
 app = Flask(__name__)
-CORS(app)
+CORS(app, supports_credentials=True)
 
 from questions import questions
 
@@ -19,17 +19,20 @@ from questions import questions
 
 # Routes
 # Obtención de preguntas
+@cross_origin
 @app.route("/questions", methods=['GET'])
 def getQuestion():
     return jsonify(questions)
 
 # Request de tipo de gráficas
+@cross_origin
 @app.route("/questions", methods=['POST'])
 def getURL():
     a = request.json
     return "https://www.fundacion-affinity.org/sites/default/files/los-10-sonidos-principales-del-perro.jpg"
 
 # Aviso de subida de archivos a Firebase
+@cross_origin
 @app.route("/files", methods=['POST'])
 def addFile():
     fileNames = request.json

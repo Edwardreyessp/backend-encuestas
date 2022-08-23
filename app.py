@@ -5,6 +5,7 @@ app = Flask(__name__)
 CORS(app, supports_credentials=True)
 
 from questions import questions
+url = ''
 
 # Config
 # app.config["UPLOAD_FOLDER"] = "static/files"
@@ -18,10 +19,18 @@ from questions import questions
 #         return False
 
 # Routes
+# Aviso de subida de archivos a Firebase
+@cross_origin
+@app.route("/files", methods=['POST'])
+def addFile():
+    url = request.json
+    return url['word']
+
 # Obtención de preguntas
 @cross_origin
 @app.route("/questions", methods=['GET'])
 def getQuestion():
+    print(url)
     return jsonify(questions)
 
 # Request de tipo de gráficas
@@ -30,13 +39,6 @@ def getQuestion():
 def getURL():
     a = request.json
     return "https://www.fundacion-affinity.org/sites/default/files/los-10-sonidos-principales-del-perro.jpg"
-
-# Aviso de subida de archivos a Firebase
-@cross_origin
-@app.route("/files", methods=['POST'])
-def addFile():
-    fileNames = request.json
-    return fileNames
 
 # Descontinuado
 # @app.route("/questions/<string:question_name>", methods=['PUT'])

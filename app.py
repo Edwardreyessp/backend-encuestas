@@ -4,10 +4,10 @@ from flask_cors import CORS, cross_origin
 app = Flask(__name__)
 CORS(app, supports_credentials=True)
 
-from questions import questions
+from questions_v2 import questions
 url = ''
 
-# Config
+# Config venv\Scripts\Activate.ps1
 # app.config["UPLOAD_FOLDER"] = "static/files"
 # ALLOWED_EXTENSIONS = set(["jpg", "docx", "csv", "xlsx"])
 
@@ -24,7 +24,7 @@ url = ''
 @app.route("/files", methods=['POST'])
 def addFile():
     url = request.json
-    return url['word']
+    return url
 
 # Obtención de preguntas
 @cross_origin
